@@ -1,30 +1,24 @@
 language: java
-
 jdk:
 - oraclejdk8
-
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-
 cache:
   directories:
-  - $HOME/.gradle/caches/
-  - $HOME/.gradle/wrapper/
-  - $HOME/.sonar/cache/
-
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
+  - "$HOME/.sonar/cache/"
 addons:
   sonarqube:
     organization: kret-github
     token:
-      secure: mvjZ1Ta3PwlFLF/8edu0ziIIDIlgYzy0GqcUkcZPhQImG/s3QiGrdJiRavaRofO+52urhLoICb+Yn4mw3UYSMvz1wpzK+LaC1IQLcBgf8nZ91ZruUOFvgF03iJAI6rVOhbvs84509nyKt1oVWoIrvIi9RTTdJccjsugbA6s24TANuCE3zOhoZFrEizJPzp1etUb6LPxS4mluFrdnKn1yeEubV4hWx+CEX0vzkJRoI2qlnT2Jo1YMB2mnOp/msLqKDsI6RhFdtgLhXc9Bz40ie9pLNIx2dWZgXzNCocqVdUqM4uLSltc8V6fRi57rjwQs43CApOG/fhMp4Hg0ZBIdNUiABnSxvylm3/q80ZmOItNvhgpz0m7ouch4pm6/48nD80N8mkjaTEwGSHYK7/OuKarxIBTn5+riklLH4WZTvDkyJex0BL8up7Sc/oSKKli0n4Vu9Gc24SJVoueaZrfyVbpbgS77Dbwf1suaTIghOVx2g7eb5mcMO0Oo4xyRmZasDJUsvCE9Wp0sOyMIZgBQ1WNhCEhv9wREoZv3COtd//78lp3N5Sma7Krpavz2phR3piSuONYuE77EY1nHfRzfzXKF0IKdbwfsaSCARJNw+BETSL8Bm4b1cwP+/Uvov2K5qPBFdg4Iut6egT6byB8AJpYDDt5lJaJh1T9+Muo+tt0=
+      secure: YayxEwIGnhpzaIyJ3RzhEH3GT2ZoTxlNcZxlCUlu8Eq/CTJF5QVZynxtEEz7GSyBAxaoU/eAdwTw+zyfeeLXeWhgSzk7gHAeSIMkZ8sFkPF8L76I3RwPjbdtZFN5I2S0zsHElXVWCUsVRHa7z6j8jACYfAjbq04XaRdxK6l0rrgdMtQ9tPnmM3wgxXtCRzE06S3HdI+OR2ojAWm74sfA++NkcbkEe7whWjn71oRoltDHvE62bourOBy8FAAHxRyJm06fn+CcQB0r5z4ZQOPx7sa8UO+WT9tbtx8cbUlBKsUwtwnPL/KA/rHJ6w2TVpAM0nBl4t+tfGQV2VtYteI/ebRT64KI/G+U+zUZFXXx0aNKA41KJYruB7f5wCrGfgwvttLwasCzCiPrDl7oJJCfvhcARpg7LVj1TGzRoGxxerDQfJX69ydBNqqgD/Dt1hJEl5xQ1ChszvOxsQRZE9K38nISWCc6EFLWFJTpTube578JdOmXmmCA8txpDnyXQE+4INgrtHPkQxyNEhC8x9g2fHLBPVbGel81tAFsy8dBn4k5Oc40kmS9PSup3pONCYNXpkR5NPMBIpGaTSg6e0V3fBDRgUA60u8JRgucdVeyap5fK7thnkXPVLkgG5nlV7cRe765dB+u0348zOavDzcdxT9zsbcF3ECi4pHnj6ZkUXc=
     branches:
     - master
-
 notifications:
   email: false
   slack:
     secure: D1mGdYiMe8cLXmhw33v5bbxRkV5pffNqKYCS8KdmyRd9aUZt1nj74pOdxgHgPgF7JEpcz5dEL53YLJ+LFN4e22HBW9xjU/CNc7LiVLup6Cf2bV9LnCW2DE+JHcSKTh4rSnlWj3JAjrLZ91Z+6SIaKVchbTU2EyehlFIfVLb1BZJvoym30xWC3KVU9rPotbjcwTlEIGlZXwl1E1V+5V2GUhjQ8xA3MYSIWP6Isn5Y/EoTYUfQH7q55406+mB3fmUaKlcEaIO7s5rjBoTyP8QqDPigd16o/H0hECJUg/zPL82YtrZKJ7w+e2diDghpesM+LekYmPrrbHVpv37wdm3pnusKpDftiTIZb2+9ZEHexDAYpEgs1mf7gznVj0IwPGND9N1LYkhycPQBbbk3bGh2d9Qm2EaaKSm7M5OqKlfANqOuaNQb/PhvJMJIhaQQqf+QoTv6ld0ugsnShZ2WFVwPl8v5k8mP7hH1KKFXfKQ9K4q+j0sXpvg1/hjrOhJ0yZO7sEjNIPZunb0f+7chehvdDiyHpHvdUF1XPRHWorG5J1/9eq+iwCkrSvXF99O4+rrkPfus0qSpEGcu158kHWrVqT7kuYZ/JlaE5Utrq+g+xwkAMrY9X3KBDIxdoicUtQ0lnqM/FJ9Of07D4bNjWC/mZj9s/pxiDO/Irv3wSNtABgU=
-
 script:
-- ./gradlew check jacocoTestReport sonarqube
+- "./gradlew check jacocoTestReport sonarqube"
