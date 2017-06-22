@@ -54,6 +54,8 @@ public class LimbApplication extends Application {
                    });
             executorService.execute(benchmarkTask);
         });
+
+        view.setSwapButtonActionHandler(event -> view.swapInputTextFieldValues());
     }
 
 }

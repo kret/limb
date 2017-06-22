@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import pl.lanuda.kret.limb.benchmark.BenchmarkResult;
 
@@ -19,6 +20,7 @@ class View {
     private TextField iteratedListSizeInputTextField;
 
     private Button runButton;
+    private Button swapButton;
 
     private Label outputLabel;
 
@@ -40,10 +42,13 @@ class View {
         runButton = new Button("Run");
         runButton.setDefaultButton(true);
 
+        swapButton = new Button("Swap");
+
         outputLabel = new Label();
 
+        HBox buttons = new HBox(2, swapButton, runButton);
         VBox root = new VBox(2, wrappedListSizeInputLabel, wrappedListSizeInputTextField,
-                iteratedListSizeInputLabel, iteratedListSizeInputTextField, runButton, outputLabel);
+                iteratedListSizeInputLabel, iteratedListSizeInputTextField, buttons, outputLabel);
         root.setPadding(new Insets(2));
 
         scene = new Scene(root, 600, 180);
@@ -77,6 +82,10 @@ class View {
         runButton.setOnAction(actionHandler);
     }
 
+    void setSwapButtonActionHandler(EventHandler<ActionEvent> actionHandler) {
+        swapButton.setOnAction(actionHandler);
+    }
+
     Scene getScene() {
         return scene;
     }
@@ -91,7 +100,14 @@ class View {
 
     private void setControlState(boolean controlState) {
         runButton.setDisable(controlState);
+        swapButton.setDisable(controlState);
         wrappedListSizeInputTextField.setDisable(controlState);
         iteratedListSizeInputTextField.setDisable(controlState);
+    }
+
+    void swapInputTextFieldValues() {
+        String wrappedInputText = wrappedListSizeInputTextField.getText();
+        wrappedListSizeInputTextField.setText(iteratedListSizeInputTextField.getText());
+        iteratedListSizeInputTextField.setText(wrappedInputText);
     }
 }
