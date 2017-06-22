@@ -1,4 +1,4 @@
-package pl.lanuda.kret.limb;
+package pl.lanuda.kret.limb.benchmark.view;
 
 import javafx.scene.control.TextFormatter;
 

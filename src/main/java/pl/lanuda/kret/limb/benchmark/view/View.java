@@ -1,4 +1,4 @@
-package pl.lanuda.kret.limb;
+package pl.lanuda.kret.limb.benchmark.view;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,9 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import pl.lanuda.kret.limb.benchmark.BenchmarkResult;
 
-import java.text.NumberFormat;
-
-class View {
+public class View {
 
     private TextField wrappedListSizeInputTextField;
     private TextField iteratedListSizeInputTextField;
@@ -22,15 +20,11 @@ class View {
     private Button runButton;
     private Button swapButton;
 
-    private Label outputLabel;
+    private BenchmarkOutputLabel outputLabel;
 
     private Scene scene;
 
-    private NumberFormat numberFormat;
-
-    View() {
-        numberFormat = NumberFormat.getIntegerInstance();
-
+    public View() {
         Label wrappedListSizeInputLabel = new Label("Wrapped list size");
         wrappedListSizeInputTextField = new TextField("1000");
         wrappedListSizeInputTextField.setTextFormatter(new TextFormatter<>(new BenchmarkInputTextFilter()));
@@ -44,7 +38,7 @@ class View {
 
         swapButton = new Button("Swap");
 
-        outputLabel = new Label();
+        outputLabel = new BenchmarkOutputLabel();
 
         HBox buttons = new HBox(2, swapButton, runButton);
         VBox root = new VBox(2, wrappedListSizeInputLabel, wrappedListSizeInputTextField,
@@ -54,47 +48,49 @@ class View {
         scene = new Scene(root, 600, 180);
     }
 
-    String getWrappedListSizeInputText() {
+    public String getWrappedListSizeInputText() {
         return wrappedListSizeInputTextField.getText();
     }
 
-    String getIteratedListSizeInputText() {
+    public String getIteratedListSizeInputText() {
         return iteratedListSizeInputTextField.getText();
     }
 
-    void showProcessingStartedMessage(int wrappedListSize, int iteratedListSize) {
-        outputLabel.setText(String.format("Running (wrapped size: %s, iterated size: %s)",
-                numberFormat.format(wrappedListSize),
-                numberFormat.format(iteratedListSize)));
+    public void showProcessingStartedMessage(int wrappedListSize, int iteratedListSize) {
+        outputLabel.showProcessingStartedMessage(wrappedListSize, iteratedListSize);
     }
 
-    void showSuccessOutputMessage(BenchmarkResult result) {
-        outputLabel.setText(String.format("Done. Intersection size: %s, execution duration: %sns.",
-                numberFormat.format(result.getIntersection().size()),
-                numberFormat.format(result.getExecutionDuration())));
+    public void showSuccessOutputMessage(BenchmarkResult result) {
+        outputLabel.showSuccessOutputMessage(result);
     }
 
-    void showFailureOutputMessage(Throwable exception) {
-        outputLabel.setText(String.format("Failed. Failure reason: %s", exception.getMessage()));
+    public void showFailureOutputMessage(Throwable exception) {
+        outputLabel.showFailureOutputMessage(exception);
     }
 
-    void setRunButtonActionHandler(EventHandler<ActionEvent> actionHandler) {
+    public void setRunButtonActionHandler(EventHandler<ActionEvent> actionHandler) {
         runButton.setOnAction(actionHandler);
     }
 
-    void setSwapButtonActionHandler(EventHandler<ActionEvent> actionHandler) {
+    public void setSwapButtonActionHandler(EventHandler<ActionEvent> actionHandler) {
         swapButton.setOnAction(actionHandler);
     }
 
-    Scene getScene() {
+    public void swapInputTextFieldValues() {
+        String wrappedInputText = wrappedListSizeInputTextField.getText();
+        wrappedListSizeInputTextField.setText(iteratedListSizeInputTextField.getText());
+        iteratedListSizeInputTextField.setText(wrappedInputText);
+    }
+
+    public Scene getScene() {
         return scene;
     }
 
-    void enableControls() {
+    public void enableControls() {
         setControlState(false);
     }
 
-    void disableControls() {
+    public void disableControls() {
         setControlState(true);
     }
 
@@ -103,11 +99,5 @@ class View {
         swapButton.setDisable(controlState);
         wrappedListSizeInputTextField.setDisable(controlState);
         iteratedListSizeInputTextField.setDisable(controlState);
-    }
-
-    void swapInputTextFieldValues() {
-        String wrappedInputText = wrappedListSizeInputTextField.getText();
-        wrappedListSizeInputTextField.setText(iteratedListSizeInputTextField.getText());
-        iteratedListSizeInputTextField.setText(wrappedInputText);
     }
 }
