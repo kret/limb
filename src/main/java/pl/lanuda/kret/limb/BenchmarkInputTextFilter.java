@@ -8,6 +8,8 @@ import java.util.function.UnaryOperator;
 
 public class BenchmarkInputTextFilter implements UnaryOperator<TextFormatter.Change> {
 
+    private NumberFormat numberFormat = NumberFormat.getIntegerInstance();
+
     @Override
     public TextFormatter.Change apply(TextFormatter.Change change) {
         if (change.getControlNewText().isEmpty()) {
@@ -15,7 +17,7 @@ public class BenchmarkInputTextFilter implements UnaryOperator<TextFormatter.Cha
         }
 
         ParsePosition parsePosition = new ParsePosition(0);
-        Number parsed = NumberFormat.getIntegerInstance().parse(change.getControlNewText(), parsePosition);
+        Number parsed = numberFormat.parse(change.getControlNewText(), parsePosition);
 
         if (parsed == null || parsePosition.getIndex() < change.getControlNewText().length()) {
             return null;
