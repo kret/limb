@@ -34,7 +34,7 @@ public class LimbApplication extends Application {
     }
 
     private void hookupEvents() {
-        view.getRunButton().setOnAction(event -> {
+        view.setRunButtonActionHandler(event -> {
             view.disableControls();
 
             int wrappedListSize = Integer.parseInt(view.getWrappedListSizeInputText());

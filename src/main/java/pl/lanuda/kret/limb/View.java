@@ -1,5 +1,7 @@
 package pl.lanuda.kret.limb;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -61,8 +63,8 @@ class View {
         outputLabel.setText(String.format("Failed. Failure reason: %s", exception.getMessage()));
     }
 
-    Button getRunButton() {
-        return runButton;
+    void setRunButtonActionHandler(EventHandler<ActionEvent> actionHandler) {
+        runButton.setOnAction(actionHandler);
     }
 
     Scene getScene() {
