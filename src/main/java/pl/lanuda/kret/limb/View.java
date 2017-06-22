@@ -40,7 +40,7 @@ class View {
                 iteratedListSizeInputLabel, iteratedListSizeInputTextField, runButton, outputLabel);
         root.setPadding(new Insets(2));
 
-        scene = new Scene(root);
+        scene = new Scene(root, 600, 180);
     }
 
     String getWrappedListSizeInputText() {
