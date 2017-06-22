@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class BenchmarkTask extends Task<BenchmarkResult> {
 
@@ -47,8 +48,9 @@ public class BenchmarkTask extends Task<BenchmarkResult> {
 
         Set<Integer> wrapped = new HashSet<>(toBeWrapped);
 
+        Stream<Integer> stream = iterated.stream();
         long startTime = System.nanoTime();
-        List<Integer> intersection = iterated.stream().filter(wrapped::contains).collect(Collectors.toList());
+        List<Integer> intersection = stream.filter(wrapped::contains).collect(Collectors.toList());
         long endTime = System.nanoTime();
 
         return new BenchmarkResult(intersection, endTime - startTime);
