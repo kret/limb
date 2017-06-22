@@ -6,14 +6,7 @@ public class BenchmarkInput {
     private int iteratedListSize;
 
     public BenchmarkInput(int wrappedListSize, int iteratedListSize) {
-        if (wrappedListSize < 1) {
-            throw new IllegalArgumentException("Wrapped list size must be greater than 0");
-        }
         this.wrappedListSize = wrappedListSize;
-
-        if (iteratedListSize < 1) {
-            throw new IllegalArgumentException("Iterated list size must be greater than 0");
-        }
         this.iteratedListSize = iteratedListSize;
     }
 
