@@ -11,6 +11,8 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.VBox;
 import pl.lanuda.kret.limb.benchmark.BenchmarkResult;
 
+import java.text.NumberFormat;
+
 class View {
 
     private TextField wrappedListSizeInputTextField;
@@ -22,7 +24,11 @@ class View {
 
     private Scene scene;
 
+    private NumberFormat numberFormat;
+
     View() {
+        numberFormat = NumberFormat.getIntegerInstance();
+
         Label wrappedListSizeInputLabel = new Label("Wrapped list size");
         wrappedListSizeInputTextField = new TextField("1000");
         wrappedListSizeInputTextField.setTextFormatter(new TextFormatter<>(new BenchmarkInputTextFilter()));
@@ -52,14 +58,15 @@ class View {
     }
 
     void showProcessingStartedMessage(int wrappedListSize, int iteratedListSize) {
-        outputLabel.setText(String.format("Running (wrapped size: %d, iterated size: %d)",
-                wrappedListSize, iteratedListSize));
+        outputLabel.setText(String.format("Running (wrapped size: %s, iterated size: %s)",
+                numberFormat.format(wrappedListSize),
+                numberFormat.format(iteratedListSize)));
     }
 
     void showSuccessOutputMessage(BenchmarkResult result) {
-        outputLabel.setText(String.format("Done. Intersection size: %d, execution duration: %dns.",
-                result.getIntersection().size(),
-                result.getExecutionDuration()));
+        outputLabel.setText(String.format("Done. Intersection size: %s, execution duration: %sns.",
+                numberFormat.format(result.getIntersection().size()),
+                numberFormat.format(result.getExecutionDuration())));
     }
 
     void showFailureOutputMessage(Throwable exception) {
