@@ -1,52 +1,59 @@
 package pl.lanuda.kret.limb;
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import pl.lanuda.kret.limb.benchmark.BenchmarkInput;
+import pl.lanuda.kret.limb.benchmark.BenchmarkResult;
+import pl.lanuda.kret.limb.benchmark.BenchmarkTask;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class LimbApplication extends Application {
 
     private View view;
+    private ExecutorService executorService;
+
+    public LimbApplication() {
+        executorService = Executors.newSingleThreadExecutor(runnable -> {
+            Thread thread = Executors.defaultThreadFactory().newThread(runnable);
+            thread.setDaemon(true);
+            return thread;
+        });
+
+    }
 
     @Override
     public void start(Stage stage) {
         view = new View();
+        hookupEvents();
 
         stage.setTitle("LIMB");
-        stage.setScene(view.scene);
+        stage.setScene(view.getScene());
         stage.show();
     }
 
-    private static class View {
+    private void hookupEvents() {
+        view.getRunButton().setOnAction(event -> {
+            view.disableControls();
 
-        private TextField wrappedListSizeInputTextField;
-        private TextField iteratedListSizeInputTextField;
+            int wrappedListSize = Integer.parseInt(view.getWrappedListSizeInputText());
+            int iteratedListSize = Integer.parseInt(view.getIteratedListSizeInputText());
 
-        private Button runButton;
+            view.showProcessingStartedMessage(wrappedListSize, iteratedListSize);
 
-        private Label outputLabel;
-
-        private Scene scene;
-
-        private View() {
-            Label wrappedListSizeInputLabel = new Label("Wrapped list size");
-            wrappedListSizeInputTextField = new TextField();
-
-            Label iteratedListSizeInputLabel = new Label("Iterated list size");
-            iteratedListSizeInputTextField = new TextField();
-
-            runButton = new Button("Run");
-            outputLabel = new Label();
-
-            VBox root = new VBox(2, wrappedListSizeInputLabel, wrappedListSizeInputTextField, iteratedListSizeInputLabel, iteratedListSizeInputTextField, runButton, outputLabel);
-            root.setPadding(new Insets(2));
-
-            scene = new Scene(root);
-        }
+            BenchmarkTask benchmarkTask = new BenchmarkTask(new BenchmarkInput(wrappedListSize, iteratedListSize),
+                    successEvent -> {
+                        BenchmarkResult result = (BenchmarkResult) successEvent.getSource().getValue();
+                        view.showSuccessOutputMessage(result);
+                        view.enableControls();
+                    },
+                    failureEvent -> {
+                        view.showFailureOutputMessage(failureEvent.getSource().getException());
+                        view.enableControls();
+                   });
+            executorService.execute(benchmarkTask);
+        });
     }
+
 }
