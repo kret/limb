@@ -16,10 +16,6 @@ public class BenchmarkTask extends Task<BenchmarkResult> {
     private BenchmarkInput input;
     private Random random;
 
-    public BenchmarkTask(BenchmarkInput input) {
-        this(input, null, null);
-    }
-
     public BenchmarkTask(BenchmarkInput input,
                          EventHandler<WorkerStateEvent> successHandler,
                          EventHandler<WorkerStateEvent> failureHandler) {
