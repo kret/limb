@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.VBox;
 import pl.lanuda.kret.limb.benchmark.BenchmarkResult;
 
@@ -23,10 +24,12 @@ class View {
 
     View() {
         Label wrappedListSizeInputLabel = new Label("Wrapped list size");
-        wrappedListSizeInputTextField = new TextField();
+        wrappedListSizeInputTextField = new TextField("1000");
+        wrappedListSizeInputTextField.setTextFormatter(new TextFormatter<>(new BenchmarkInputTextFilter()));
 
         Label iteratedListSizeInputLabel = new Label("Iterated list size");
-        iteratedListSizeInputTextField = new TextField();
+        iteratedListSizeInputTextField = new TextField("1000");
+        iteratedListSizeInputTextField.setTextFormatter(new TextFormatter<>(new BenchmarkInputTextFilter()));
 
         runButton = new Button("Run");
         runButton.setDefaultButton(true);
