@@ -51,4 +51,8 @@ public class BenchmarkTask extends Task<BenchmarkResult> {
 
         return new BenchmarkResult(intersection, endTime - startTime);
     }
+
+    void setSeed(long seed) {
+        random.setSeed(seed);
+    }
 }
