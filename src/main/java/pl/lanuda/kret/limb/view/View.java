@@ -1,4 +1,4 @@
-package pl.lanuda.kret.limb.benchmark.view;
+package pl.lanuda.kret.limb.view;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

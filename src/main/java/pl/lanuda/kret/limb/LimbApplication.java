@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 import pl.lanuda.kret.limb.benchmark.BenchmarkInput;
 import pl.lanuda.kret.limb.benchmark.BenchmarkResult;
 import pl.lanuda.kret.limb.benchmark.BenchmarkTask;
-import pl.lanuda.kret.limb.benchmark.view.View;
+import pl.lanuda.kret.limb.view.View;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

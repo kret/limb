@@ -1,4 +1,4 @@
-package pl.lanuda.kret.limb.benchmark.view;
+package pl.lanuda.kret.limb.view;
 
 import javafx.scene.control.Label;
 import pl.lanuda.kret.limb.benchmark.BenchmarkResult;
