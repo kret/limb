@@ -62,8 +62,11 @@ This jar does not include any 3rd party dependencies.
 #### Run application
 Launch using this command: `./gradlew run` or by running `LimbApplication` class from IntelliJ IDEA.
 
-After application starts, you can enter the input data in the 2 text fields with appropriate labels.
+After application starts, you can enter the input data in the 2 text fields with appropriate labels (_known issue_
+the application hangs with edge case inputs: empty fields and sizes bigger than Java's Integer maximum value).
+
 Press 'Swap' button to swap the values in the input fields.
+
 Press 'Run' button to execute the algorithm. Status is going to be displayed below the buttons. UI will be disabled
 until current execution ends.
 
