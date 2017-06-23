@@ -12,6 +12,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import pl.lanuda.kret.limb.benchmark.BenchmarkResult;
 
+/**
+ * A view class for LIMB application. Groups and lays out all UI controls. Allows for basic operations on them.
+ *
+ * @author Andrzej Undzillo
+ */
 public class View {
 
     private TextField wrappedListSizeInputTextField;

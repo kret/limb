@@ -10,6 +10,11 @@ import pl.lanuda.kret.limb.view.View;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * JavaFX {@link Application} class. Boostraps the application.
+ *
+ * @author Andrzej Undzillo
+ */
 public class LimbApplication extends Application {
 
     private View view;

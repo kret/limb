@@ -6,6 +6,11 @@ import java.text.NumberFormat;
 import java.text.ParsePosition;
 import java.util.function.UnaryOperator;
 
+/**
+ * A filtering operator for {@link TextFormatter} to accept digits only.
+ *
+ * @author Andrzej Undzillo
+ */
 public class BenchmarkInputTextFilter implements UnaryOperator<TextFormatter.Change> {
 
     private NumberFormat numberFormat = NumberFormat.getIntegerInstance();

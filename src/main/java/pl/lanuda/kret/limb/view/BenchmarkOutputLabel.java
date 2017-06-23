@@ -5,6 +5,11 @@ import pl.lanuda.kret.limb.benchmark.BenchmarkResult;
 
 import java.text.NumberFormat;
 
+/**
+ * A specialized {@link Label} that is meant to display status output of running the algorithm.
+ *
+ * @author Andrzej Undzillo
+ */
 public class BenchmarkOutputLabel extends Label {
 
     private NumberFormat numberFormat = NumberFormat.getIntegerInstance();
